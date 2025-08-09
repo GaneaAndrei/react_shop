@@ -1,7 +1,9 @@
 
 import { Link } from "react-router-dom";
+import { useShoppingCart } from "../context/ShoppingCartContext";
 
 export function Navbar(){
+    const {openCart,cartQuantity}=useShoppingCart()
     return (
     <nav className="container bg-white shadow-sm ">
         <div className=" hidden sm:block ">
@@ -18,7 +20,8 @@ export function Navbar(){
                         About
                     </Link>
                 </div>
-                <button style={{ width: "3rem", height: "3rem",position :"relative"}} >
+                {cartQuantity>0 && (
+                <button onClick={openCart} style={{ width: "3rem", height: "3rem",position :"relative"}} >
                     <svg className="fill-blue-500 outline-2 outline-solid rounded-full w-15 h-8"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 576 512"
@@ -36,9 +39,9 @@ export function Navbar(){
                         right: 0,
                         transform: "translate(25%, 25%)",
                     }}>
-                        3
+                        {cartQuantity}
                     </div>
-                    </button>
+                    </button>)}
             </div>
         </div>
         <div className="sm:hidden  ">
